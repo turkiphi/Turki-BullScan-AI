@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turki BullScan AI</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    color:#22c55e;
+    margin-bottom:20px;
+}
+
+.card{
+    background:#1e293b;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:20px;
+}
+
+.card h2{
+    color:#22c55e;
+    margin-bottom:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#111827;
+    padding:10px;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid #334155;
+    text-align:center;
+}
+
+.green{
+    color:#22c55e;
+}
+
+.red{
+    color:#ef4444;
+}
+
+button{
+    width:100%;
+    background:#22c55e;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+    margin:20px 0;
+}
+
+button:hover{
+    background:#16a34a;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Turki BullScan AI</h1>
+
+<div class="card">
+
+<h2>📊 Market Status</h2>
+
+<table>
+
+<tr>
+<th>NASDAQ</th>
+<th>S&P500</th>
+<th>DOW</th>
+</tr>
+
+<tr>
+<td class="green">+0.82%</td>
+<td class="green">+0.41%</td>
+<td class="red">-0.12%</td>
+</tr>
+
+</table>
+
+</div>
+
+<button onclick="scan()">Scan Stocks</button>
+
+<div class="card">
+
+<h2>⭐ Today's Bull Picks</h2>
+
+<table>
+
+<tr>
+
+<th>Rank</th>
+<th>Symbol</th>
+<th>Price</th>
+<th>RVOL</th>
+<th>Score</th>
+
+</tr>
+
+<tbody id="bulls">
+
+</tbody>
+
+</table>
+
+</div>
+<div class="card">
+
+<h2>🟢 Bullish Stocks</h2>
+
+<table>
+
+<tr>
+<th>Symbol</th>
+<th>Status</th>
+</tr>
+
+<tbody id="bullish">
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>🔥 High Relative Volume</h2>
+
+<table>
+
+<tr>
+<th>Symbol</th>
+<th>RVOL</th>
+</tr>
+
+<tbody id="volume">
+
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+const stocks = [
+
+{name:"OPEN",price:7.84,rvol:4.5,score:98},
+{name:"RIVN",price:9.12,rvol:3.8,score:95},
+{name:"SOFI",price:8.90,rvol:3.2,score:92},
+{name:"RKLB",price:6.55,rvol:2.9,score:90},
+{name:"PLTR",price:9.75,rvol:2.7,score:88}
+
+];
+
+function scan(){
+
+let bull="";
+let bullish="";
+let volume="";
+
+stocks.forEach((s,index)=>{
+
+bull+=`
+<tr>
+<td>${index+1}</td>
+<td>${s.name}</td>
+<td>$${s.price}</td>
+<td>${s.rvol}</td>
+<td>${s.score}</td>
+</tr>
+`;
+
+bullish+=`
+<tr>
+<td>${s.name}</td>
+<td class="green">Bullish</td>
+</tr>
+`;
+
+volume+=`
+<tr>
+<td>${s.name}</td>
+<td>${s.rvol}</td>
+</tr>
+`;
+
+});
+
+document.getElementById("bulls").innerHTML=bull;
+document.getElementById("bullish").innerHTML=bullish;
+document.getElementById("volume").innerHTML=volume;
+
+}
+
+scan();
+
+</script>
+
+</body>
+</html>
